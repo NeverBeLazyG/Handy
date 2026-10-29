@@ -1,0 +1,27 @@
+name: "Custom Windows Build"
+
+# Builds the patched Handy (branch "custom") for Windows x64 only.
+# No code signing, no updater artifacts (no secrets required).
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [custom]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-windows:
+    permissions:
+      contents: write
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: "windows-latest"
+      target: "x86_64-pc-windows-msvc"
+      build-args: ""
+      sign-binaries: false
+      upload-artifacts: true
+      asset-prefix: "handy-custom"
+    secrets: inherit
