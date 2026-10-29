@@ -199,6 +199,10 @@
           "transcribe_with_post_process": {
             "name": "后处理快捷键",
             "description": "可选：一个专用快捷键，始终对您的转录应用 AI 后处理。"
+          },
+          "transcribe_with_post_process_2": {
+            "name": "后处理快捷键 2",
+            "description": "可选：一个专用快捷键，始终对您的转录应用 AI 后处理。"
           }
         },
         "errors": {
@@ -460,7 +464,11 @@
         "createPrompt": "创建提示词",
         "cancel": "取消",
         "selectToEdit": "选择上方的提示词以查看和编辑其详细信息。",
-        "createFirst": "点击上方的「创建新提示词」来创建您的第一个后处理提示词。"
+        "createFirst": "点击上方的「创建新提示词」来创建您的第一个后处理提示词。",
+        "selectedPrompt2": {
+          "title": "已选提示词 2",
+          "description": "选择用于优化转录的模板或创建新模板。在提示词文本中使用 ${output} 来引用捕获的转录。"
+        }
       }
     },
     "history": {

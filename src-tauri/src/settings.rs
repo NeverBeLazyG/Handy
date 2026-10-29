@@ -469,6 +469,10 @@ pub struct AppSettings {
     pub post_process_prompts: Vec<LLMPrompt>,
     #[serde(default)]
     pub post_process_selected_prompt_id: Option<String>,
+    /// Prompt used by the second post-processing hotkey
+    /// (`transcribe_with_post_process_2`).
+    #[serde(default)]
+    pub post_process_selected_prompt_id_2: Option<String>,
     #[serde(default)]
     pub mute_while_recording: bool,
     #[serde(default)]
@@ -877,6 +881,12 @@ fn ensure_post_process_defaults(settings: &mut AppSettings) -> bool {
 
 pub const SETTINGS_STORE_PATH: &str = "settings_store.json";
 
+/// Bindings that trigger AI post-processing (only registered while
+/// post-processing is enabled).
+pub fn is_post_process_binding(id: &str) -> bool {
+    id == "transcribe_with_post_process" || id == "transcribe_with_post_process_2"
+}
+
 pub fn get_default_settings() -> AppSettings {
     #[cfg(target_os = "windows")]
     let default_shortcut = "ctrl+space";
@@ -916,6 +926,27 @@ pub fn get_default_settings() -> AppSettings {
                 .to_string(),
             default_binding: default_post_process_shortcut.to_string(),
             current_binding: default_post_process_shortcut.to_string(),
+        },
+    );
+    #[cfg(target_os = "windows")]
+    let default_post_process_shortcut_2 = "ctrl+alt+space";
+    #[cfg(target_os = "macos")]
+    let default_post_process_shortcut_2 = "option+ctrl+space";
+    #[cfg(target_os = "linux")]
+    let default_post_process_shortcut_2 = "ctrl+alt+space";
+    #[cfg(not(any(target_os = "windows", target_os = "macos", target_os = "linux")))]
+    let default_post_process_shortcut_2 = "alt+ctrl+space";
+
+    bindings.insert(
+        "transcribe_with_post_process_2".to_string(),
+        ShortcutBinding {
+            id: "transcribe_with_post_process_2".to_string(),
+            name: "Transcribe with Post-Processing 2".to_string(),
+            description:
+                "Converts your speech into text and applies AI post-processing with the second prompt."
+                    .to_string(),
+            default_binding: default_post_process_shortcut_2.to_string(),
+            current_binding: default_post_process_shortcut_2.to_string(),
         },
     );
     bindings.insert(
@@ -970,6 +1001,7 @@ pub fn get_default_settings() -> AppSettings {
         post_process_models: default_post_process_models(),
         post_process_prompts: default_post_process_prompts(),
         post_process_selected_prompt_id: None,
+        post_process_selected_prompt_id_2: None,
         mute_while_recording: false,
         append_trailing_space: false,
         app_language: default_app_language(),

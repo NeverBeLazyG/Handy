@@ -305,7 +305,7 @@ pub fn resume_all_shortcuts(app: &AppHandle) {
         if id == "cancel" {
             continue;
         }
-        if id == "transcribe_with_post_process" && !settings.post_process_enabled {
+        if settings::is_post_process_binding(id) && !settings.post_process_enabled {
             continue;
         }
         if let Err(e) = register_shortcut(app, binding.clone()) {
@@ -497,7 +497,7 @@ fn register_all_shortcuts_for_implementation(
         }
 
         // Skip post-processing shortcut when the feature is disabled
-        if id == "transcribe_with_post_process" && !current_settings.post_process_enabled {
+        if settings::is_post_process_binding(id) && !current_settings.post_process_enabled {
             continue;
         }
 
@@ -1055,16 +1055,14 @@ pub fn change_post_process_enabled_setting(app: AppHandle, enabled: bool) -> Res
     settings.post_process_enabled = enabled;
     settings::write_settings(&app, settings.clone());
 
-    // Register or unregister the post-processing shortcut
-    if let Some(binding) = settings
-        .bindings
-        .get("transcribe_with_post_process")
-        .cloned()
-    {
-        if enabled {
-            let _ = register_shortcut(&app, binding);
-        } else {
-            let _ = unregister_shortcut(&app, binding);
+    // Register or unregister the post-processing shortcuts
+    for id in ["transcribe_with_post_process", "transcribe_with_post_process_2"] {
+        if let Some(binding) = settings.bindings.get(id).cloned() {
+            if enabled {
+                let _ = register_shortcut(&app, binding);
+            } else {
+                let _ = unregister_shortcut(&app, binding);
+            }
         }
     }
 
@@ -1234,6 +1232,10 @@ pub fn delete_post_process_prompt(app: AppHandle, id: String) -> Result<(), Stri
         settings.post_process_selected_prompt_id =
             settings.post_process_prompts.first().map(|p| p.id.clone());
     }
+    if settings.post_process_selected_prompt_id_2.as_ref() == Some(&id) {
+        settings.post_process_selected_prompt_id_2 =
+            settings.post_process_prompts.first().map(|p| p.id.clone());
+    }
 
     settings::write_settings(&app, settings);
     Ok(())
@@ -1295,6 +1297,21 @@ pub fn set_post_process_selected_prompt(app: AppHandle, id: String) -> Result<()
     }
 
     settings.post_process_selected_prompt_id = Some(id);
+    settings::write_settings(&app, settings);
+    Ok(())
+}
+
+#[tauri::command]
+#[specta::specta]
+pub fn set_post_process_selected_prompt_2(app: AppHandle, id: String) -> Result<(), String> {
+    let mut settings = settings::get_settings(&app);
+
+    // Verify the prompt exists
+    if !settings.post_process_prompts.iter().any(|p| p.id == id) {
+        return Err(format!("Prompt with id '{}' not found", id));
+    }
+
+    settings.post_process_selected_prompt_id_2 = Some(id);
     settings::write_settings(&app, settings);
     Ok(())
 }

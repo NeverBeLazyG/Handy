@@ -197,8 +197,12 @@
             "description": "Das Tastenkürzel zum Abbrechen der aktuellen Aufnahme."
           },
           "transcribe_with_post_process": {
-            "name": "Nachbearbeitungs-Tastenkürzel",
-            "description": "Optional: Ein dediziertes Tastenkürzel, das immer die KI-Nachbearbeitung auf deine Transkription anwendet."
+            "name": "Nachbearbeitungs-Tastenkürzel 1",
+            "description": "Optional: Ein dediziertes Tastenkürzel, das die KI-Nachbearbeitung mit Prompt 1 auf deine Transkription anwendet."
+          },
+          "transcribe_with_post_process_2": {
+            "name": "Nachbearbeitungs-Tastenkürzel 2",
+            "description": "Optional: Ein zweites Tastenkürzel, das die KI-Nachbearbeitung mit Prompt 2 auf deine Transkription anwendet."
           }
         },
         "errors": {
@@ -444,8 +448,12 @@
       "prompts": {
         "title": "Prompt",
         "selectedPrompt": {
-          "title": "Ausgewählter Prompt",
-          "description": "Wähle eine Vorlage zur Verfeinerung von Transkriptionen oder erstelle eine neue. Verwende ${output} im Prompt-Text, um auf das erfasste Transkript zu verweisen."
+          "title": "Ausgewählter Prompt (Hotkey 1 & Editor)",
+          "description": "Wähle den Prompt für Nachbearbeitungs-Tastenkürzel 1 oder bearbeite/erstelle Prompts unten. Verwende ${output} im Prompt-Text, um auf das erfasste Transkript zu verweisen."
+        },
+        "selectedPrompt2": {
+          "title": "Ausgewählter Prompt (Hotkey 2)",
+          "description": "Wähle den Prompt, der beim Drücken von Nachbearbeitungs-Tastenkürzel 2 verwendet werden soll."
         },
         "noPrompts": "Keine Prompts verfügbar",
         "selectPrompt": "Prompt auswählen",

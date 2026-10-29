@@ -179,6 +179,10 @@
           "transcribe_with_post_process": {
             "name": "Post-Processing Hotkey",
             "description": "Optional: A dedicated hotkey that always applies AI post-processing to your transcription."
+          },
+          "transcribe_with_post_process_2": {
+            "name": "Post-Processing Hotkey 2",
+            "description": "Optional: A second dedicated hotkey that applies AI post-processing using the second selected prompt."
           }
         },
         "errors": {
@@ -444,8 +448,12 @@
       "prompts": {
         "title": "Prompt",
         "selectedPrompt": {
-          "title": "Selected Prompt",
-          "description": "Select a template for refining transcriptions or create a new one. Use ${output} inside the prompt text to reference the captured transcript."
+          "title": "Selected Prompt (Hotkey 1)",
+          "description": "Select a template for refining transcriptions with Hotkey 1 or edit prompts below. Use ${output} inside the prompt text to reference the captured transcript."
+        },
+        "selectedPrompt2": {
+          "title": "Selected Prompt (Hotkey 2)",
+          "description": "Select the prompt template used when triggered via Post-Processing Hotkey 2."
         },
         "noPrompts": "No prompts available",
         "selectPrompt": "Select a prompt",

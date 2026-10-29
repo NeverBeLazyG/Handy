@@ -179,6 +179,10 @@
           "transcribe_with_post_process": {
             "name": "Genvej til efterbehandling",
             "description": "Valgfrit: En dedikeret genvej, der altid anvender AI-efterbehandling på din transskription."
+          },
+          "transcribe_with_post_process_2": {
+            "name": "Genvej til efterbehandling 2",
+            "description": "Valgfrit: En dedikeret genvej, der altid anvender AI-efterbehandling på din transskription."
           }
         },
         "errors": {
@@ -460,7 +464,11 @@
         "createPrompt": "Opret prompt",
         "cancel": "Annuller",
         "selectToEdit": "Vælg en prompt ovenfor for at se og redigere dens detaljer.",
-        "createFirst": "Klik på 'Opret ny prompt' ovenfor for at oprette din første efterbehandlingsprompt."
+        "createFirst": "Klik på 'Opret ny prompt' ovenfor for at oprette din første efterbehandlingsprompt.",
+        "selectedPrompt2": {
+          "title": "Valgt prompt 2",
+          "description": "Vælg en skabelon til at forfine transskriptioner, eller opret en ny. Brug ${output} i promptteksten for at referere til den fangede transskription."
+        }
       }
     },
     "history": {

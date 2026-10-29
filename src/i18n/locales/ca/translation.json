@@ -179,6 +179,10 @@
           "transcribe_with_post_process": {
             "name": "Drecera de postprocessament",
             "description": "Opcional: una drecera específica que sempre aplica postprocessament amb IA a la transcripció."
+          },
+          "transcribe_with_post_process_2": {
+            "name": "Drecera de postprocessament 2",
+            "description": "Opcional: una drecera específica que sempre aplica postprocessament amb IA a la transcripció."
           }
         },
         "errors": {
@@ -460,7 +464,11 @@
         "createPrompt": "Creeu la indicació",
         "cancel": "Cancel·leu",
         "selectToEdit": "Seleccioneu una indicació more amunt per veure'n i editar-ne els detalls.",
-        "createFirst": "Feu clic a «Creeu una indicació nova» més amunt per crear la primera indicació de postprocessament."
+        "createFirst": "Feu clic a «Creeu una indicació nova» més amunt per crear la primera indicació de postprocessament.",
+        "selectedPrompt2": {
+          "title": "Indicació seleccionada 2",
+          "description": "Seleccioneu una plantilla per millorar les transcripcions o creeu-ne una de nova. Utilitzeu ${output} dins del text de la indicació per fer referència a la transcripció enregistrada."
+        }
       }
     },
     "history": {
